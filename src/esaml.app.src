@@ -1,24 +1,23 @@
 {application, esaml,
- [
-  {description, "SAML for erlang"},
-  {vsn, "2.0.0"},
-  {registered, []},
-  {included_applications, [
-  ]},
-  {applications, [
-                  kernel,
-                  stdlib,
-                  xmerl,
-                  cowboy,
-                  ssl,
-                  inets
-                 ]},
-  {mod, { esaml, []}},
-  {env, [
-    {org_name, "SAML Service Provider"},
-    {org_displayname, "SAML Service Provider @ Some Location"},
-    {org_url, "http://sp.example.com"},
-    {tech_contact, [{name, "SAML SP Support"}, {email, "saml-support@sp.example.com"}]},
-    {trusted_fingerprints, []}
-    ]}
- ]}.
+    [
+        {description, "SAML for erlang"},
+        {vsn, "2.1.0"},
+        {applications, [
+            kernel,
+            inets,
+            ssl,
+            stdlib,
+            xmerl,
+            cowlib,
+            cowboy,
+            ranch
+        ]},
+        {env, [
+            {org_name, "SAML Service Provider"},
+            {org_displayname, "SAML Service Provider @ Some Location"},
+            {org_url, "http://sp.example.com"},
+            {tech_contact, [{name, "SAML SP Support"}, {email, "saml-support@sp.example.com"}]},
+            {trusted_fingerprints, []}
+        ]},
+        {mod, {esaml, []}}
+    ]}.
