@@ -116,14 +116,18 @@ build_nsinfo(_Ns, Other) -> Other.
 
 %% @private
 start_ets() ->
-    {ok, spawn_link(fun() ->
-        register(esaml_ets_table_owner, self()),
-        ets:new(esaml_assertion_seen, [set, public, named_table]),
-        ets:new(esaml_privkey_cache, [set, public, named_table]),
-        ets:new(esaml_certbin_cache, [set, public, named_table]),
-        ets:new(esaml_idp_meta_cache, [set, public, named_table]),
-        ets_table_owner()
-    end)}.
+    case erlang:whereis(esaml_ets_table_owner) of 
+        undefined -> 
+            {ok, spawn_link(fun() -> 
+                register(esaml_ets_table_owner, self()), 
+                ets:new(esaml_assertion_seen, [set, public, named_table]), 
+                ets:new(esaml_privkey_cache, [set, public, named_table]), 
+                ets:new(esaml_certbin_cache, [set, public, named_table]), 
+                ets:new(esaml_idp_meta_cache, [set, public, named_table]), 
+                ets_table_owner() 
+            end)}; 
+        Pid -> {ok, Pid} 
+    end. 
 
 %% @private
 ets_table_owner() ->
