@@ -41,8 +41,7 @@ init(_Transport, Req, _Args) ->
     % (this call will cache after the first time around, so it will be fast)
 
     % TODO metadata URL is unknown
-    %% IdpMeta = esaml_util:load_metadata("https://sts.testswisscom.com/adfs/ls/IdpInitiatedSignon.aspx"),
-    IdpMeta = #esaml_idp_metadata{login_location = "https://sts.testswisscom.com/adfs/ls/IdpInitiatedSignon.aspx"},
+    IdpMeta = esaml_util:load_metadata("https://some.idp.com/idp/saml2/idp/metadata.php"),
 
     {ok, Req, #state{sp = SP, idp = IdpMeta}}.
 
