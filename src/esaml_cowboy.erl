@@ -55,14 +55,14 @@ reply_with_req(IDP, SignedXml, RelayState, Req) ->
     if byte_size(Target) > 2042 ->
         Html = esaml_binding:encode_http_post(IDP, SignedXml, RelayState),
         cowboy_req:reply(200, 
-            #{<<"Cache-Control">> => <<"no-cache">>,
-              <<"Pragma">> => <<"no-cache">>}
+            #{<<"cache-control">> => <<"no-cache">>,
+              <<"pragma">> => <<"no-cache">>}
         , Html, Req);
     true ->
         cowboy_req:reply(302, 
-            #{<<"Cache-Control">> => <<"no-cache">>,
-              <<"Pragma">> => <<"no-cache">>,
-              <<"Location">> => Target}
+            #{<<"cache-control">> => <<"no-cache">>,
+              <<"pragma">> => <<"no-cache">>,
+              <<"location">> => Target}
         , <<"Redirecting...">>, Req)
     end.
 
