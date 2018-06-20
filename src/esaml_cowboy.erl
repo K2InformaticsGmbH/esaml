@@ -80,7 +80,7 @@ validate_logout(SP, Req) ->
             %      same time as the API change on body_qs/2, so we can use it to detect
             %      which argument layout we need to use. this way we can be compat with
             %      both cowboy <1.0 and 1.0.x.
-            {ok, PostVals, Req2} = cowboy_req:read_body(Req, #{length => 128000}),
+            {ok, PostVals, Req2} = cowboy_req:read_urlencoded_body(Req, #{length => 128000}),
             SAMLEncoding = proplists:get_value(<<"SAMLEncoding">>, PostVals),
             SAMLResponse = proplists:get_value(<<"SAMLResponse">>, PostVals,
                 proplists:get_value(<<"SAMLRequest">>, PostVals)),
@@ -145,7 +145,7 @@ validate_assertion(SP, Req) ->
         {error, Reason :: term(), Req}.
 validate_assertion(SP, DuplicateFun, Req) ->
     % XXX: compat hack, see first version above for explanation
-    {ok, PostVals, Req2} = cowboy_req:read_body(Req, #{length => 128000}),
+    {ok, PostVals, Req2} = cowboy_req:read_urlencoded_body(Req, #{length => 128000}),
     SAMLEncoding = proplists:get_value(<<"SAMLEncoding">>, PostVals),
     SAMLResponse = proplists:get_value(<<"SAMLResponse">>, PostVals),
     RelayState = proplists:get_value(<<"RelayState">>, PostVals),
