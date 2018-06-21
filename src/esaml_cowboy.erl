@@ -76,10 +76,6 @@ reply_with_req(IDP, SignedXml, RelayState, Req) ->
 validate_logout(SP, Req) ->
     case cowboy_req:method(Req) of
         <<"POST">> ->
-            % XXX: compat hack, the cowboy_req:continue/1 function was introduced at the
-            %      same time as the API change on body_qs/2, so we can use it to detect
-            %      which argument layout we need to use. this way we can be compat with
-            %      both cowboy <1.0 and 1.0.x.
             {ok, PostVals, Req2} = cowboy_req:read_urlencoded_body(Req, #{length => 128000}),
             SAMLEncoding = proplists:get_value(<<"SAMLEncoding">>, PostVals),
             SAMLResponse = proplists:get_value(<<"SAMLResponse">>, PostVals,
