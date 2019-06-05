@@ -152,7 +152,7 @@ validate_assertion(SP, DuplicateFun, Req) ->
         Xml ->
             case SP:validate_assertion(Xml, DuplicateFun) of
                 {ok, A} -> {ok, A, RelayState, Req2};
-                {error, E} -> {error, E, Req2}
+                {error, E} -> {error, {E, Xml}, Req2}
             end
     end.
 
