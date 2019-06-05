@@ -31,8 +31,12 @@ canon_name(Ns, Name, Nsp) ->
                true -> Nsp#xmlNamespace.default
             end;
         _ ->
-            Bytes = io_lib:format("Name : ~p~nNsp : ~p~nNs : ~p~n~n~n", [Name, Nsp, Ns]),
-            catch file:write_file("D:/Temp/esaml.txt", Bytes, [append]),
+            case Nsp of
+                #xmlNamespace{} -> ok;
+                _ ->
+                    LogLine = io_lib:format("Name : ~p~nNsp : ~p~nNs : ~p~n~n~n", [Name, Nsp, Ns]),
+                    catch file:write_file("D:/Temp/esaml.txt", LogLine, [append])
+            end,
             case proplists:get_value(Ns, Nsp#xmlNamespace.nodes) of
                 undefined ->
                     error({ns_not_found, Ns, Nsp});
