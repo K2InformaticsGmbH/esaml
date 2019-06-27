@@ -2,15 +2,11 @@
 
 ![Travis (.org)](https://img.shields.io/travis/K2InformaticsGmbH/esaml.svg)
 ![Coveralls github](https://img.shields.io/coveralls/github/K2InformaticsGmbH/esaml.svg)
-![GitHub](https://img.shields.io/github/license/K2InformaticsGmbH/esaml.svg)
-![GitHub release](https://img.shields.io/github/release/K2InformaticsGmbH/esaml.svg)
-![GitHub Release Date](https://img.shields.io/github/release-date/K2InformaticsGmbH/esaml.svg)
 
 [travis]: https://travis-ci.org/K2InformaticsGmbH/esaml
 [travis badge]: https://img.shields.io/travis/K2InformaticsGmbH/esaml/master.svg?style=flat-square
 [coveralls]: https://coveralls.io/github/K2InformaticsGmbH/esaml
 [coveralls badge]: https://img.shields.io/coveralls/K2InformaticsGmbH/esaml/master.svg?style=flat-square
-[erlang version badge]: https://img.shields.io/badge/erlang-20.0%20to%2020.1-blue.svg?style=flat-square
 
 An implementation of the Security Assertion Markup Language (SAML) in Erlang. So far this supports enough of the standard to act as a Service Provider (SP) to perform authentication with SAML. It has been tested extensively against the SimpleSAMLPHP IdP and can be used in production.
 
