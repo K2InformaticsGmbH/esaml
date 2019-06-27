@@ -31,14 +31,10 @@ canon_name(Ns, Name, Nsp) ->
                true -> Nsp#xmlNamespace.default
             end;
         _ ->
-            case Nsp of
-                [] -> 'urn:oasis:names:tc:SAML:2.0:assertion';
-                Nsp ->
-                    case proplists:get_value(Ns, Nsp#xmlNamespace.nodes) of
-                        undefined ->
-                            error({ns_not_found, Ns, Nsp});
-                        Uri -> atom_to_list(Uri)
-                    end
+            case proplists:get_value(Ns, Nsp#xmlNamespace.nodes) of
+                undefined ->
+                    error({ns_not_found, Ns, Nsp});
+                Uri -> atom_to_list(Uri)
             end
     end,
     NsPart = if is_atom(NsPartRaw) -> atom_to_list(NsPartRaw); true -> NsPartRaw end,

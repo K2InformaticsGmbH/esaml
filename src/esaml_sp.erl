@@ -250,7 +250,7 @@ decrypt_assertion(EncXml, #esaml_sp{key = PrivKey}, Ns) ->
         [#xmlText{value = CipherData}] = xmerl_xpath:string("/saml:EncryptedAssertion/xenc:EncryptedData/xenc:CipherData/xenc:CipherValue/text()", EncXml, [{namespace, Ns}]),
         <<IVec:16/binary, EncData/binary>> = base64:decode(CipherData),
         DecAssertion = crypto:block_decrypt(aes_cbc256, Key, IVec, EncData),
-        {AssertionXml, _} = xmerl_scan:string(binary_to_list(DecAssertion)),
+        {AssertionXml, _} = xmerl_scan:string(binary_to_list(DecAssertion), [{namespace_conformant, true}]),
         AssertionXml
     catch
         _Type:_Error -> {error, bad_assertion}
