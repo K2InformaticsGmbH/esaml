@@ -32,15 +32,13 @@ canon_name(Ns, Name, Nsp) ->
             end;
         _ ->
             case Nsp of
-                #xmlNamespace{} -> ok;
-                _ ->
-                    LogLine = io_lib:format("Name : ~p~nNsp : ~p~nNs : ~p~n~n~n", [Name, Nsp, Ns]),
-                    catch file:write_file("D:/Temp/esaml.txt", LogLine, [append])
-            end,
-            case proplists:get_value(Ns, Nsp#xmlNamespace.nodes) of
-                undefined ->
-                    error({ns_not_found, Ns, Nsp});
-                Uri -> atom_to_list(Uri)
+                [] -> 'urn:oasis:names:tc:SAML:2.0:assertion';
+                Nsp ->
+                    case proplists:get_value(Ns, Nsp#xmlNamespace.nodes) of
+                        undefined ->
+                            error({ns_not_found, Ns, Nsp});
+                        Uri -> atom_to_list(Uri)
+                    end
             end
     end,
     NsPart = if is_atom(NsPartRaw) -> atom_to_list(NsPartRaw); true -> NsPartRaw end,
