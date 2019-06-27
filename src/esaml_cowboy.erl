@@ -152,10 +152,7 @@ validate_assertion(SP, DuplicateFun, Req) ->
         Xml ->
             case SP:validate_assertion(Xml, DuplicateFun) of
                 {ok, A} -> {ok, A, RelayState, Req2};
-                {error, E} ->
-                    LogLine = io_lib:format("Xml : ~p~n~n~n", [Xml]),
-                    catch file:write_file("D:/Temp/esaml_xml.txt", LogLine, [append]),
-                    {error, {E, Xml}, Req2}
+                {error, E} -> {error, E, Req2}
             end
     end.
 
